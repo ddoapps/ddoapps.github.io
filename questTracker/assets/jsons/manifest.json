@@ -1,0 +1,20 @@
+{
+	"background_color": "#111111",
+	"display": "standalone",
+	"icons": [
+		{
+			"src": "../images/icons/d20Icon_192x192.png",
+			"type": "image/png",
+			"sizes": "192x192"
+		},
+		{
+			"src": "../images/icons/d20Icon_512x512.png",
+			"type": "image/png",
+			"sizes": "512x512"
+		}
+	],
+	"name": "DDO Quest Tracker",
+	"short_name": "DDO Quest Tracker",
+	"start_url": "../../index.html",
+	"theme_color": "#282828"
+}
