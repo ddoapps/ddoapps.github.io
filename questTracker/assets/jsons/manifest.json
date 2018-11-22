@@ -14,7 +14,7 @@
 		}
 	],
 	"name": "DDO Quest Tracker",
-	"short_name": "DDO Quest Tracker",
+	"short_name": "DDO Quests",
 	"start_url": "../../index.html",
 	"theme_color": "#282828"
 }
