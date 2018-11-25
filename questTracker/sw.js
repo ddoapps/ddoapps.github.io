@@ -1,4 +1,4 @@
-importScripts("precache-manifest.f970d8d29020570a420760dbce377390.js", "https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
+importScripts("precache-manifest.9dd87b217246cff2b93a0852b389c5b3.js", "https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 workbox.skipWaiting();
 workbox.clientsClaim();
@@ -86,7 +86,20 @@ workbox.routing.registerRoute(/\/assets\/styles\/(.*)/, workbox.strategies.stale
 		var database;
 	
 		var functions = {
-			respondWith: function ( data, status ) {
+			retrieveQuests: function () {
+				return new Promise( function ( resolve, reject ) {
+					fetch( '/assets/jsons/quests.json' ).then( function ( response ) {
+						response.json().then( function ( json ) {
+							resolve( json );
+						}, function () {
+							reject();
+						} );
+					}, function () {
+						reject();
+					} );
+				} );
+			}
+			, respondWith: function ( data, status ) {
 				if ( status == 204 ) {
 					return new Response( null, { status: status } );
 				} else {
@@ -126,6 +139,90 @@ workbox.routing.registerRoute(/\/assets\/styles\/(.*)/, workbox.strategies.stale
 					);
 				} );
 			}
+			, retrieveAllQuests: function () {
+				return new Promise( function ( resolve, reject ) {
+					functions.retrieveQuests().then(
+						function ( quests ) {
+							var results = [];
+
+							[ 'heroic', 'epic' ].forEach( function ( typeKey ) {
+								Object.keys( quests ).forEach( function ( questKey ) {
+									var quest = quests[ questKey ];
+									var questType = quest[ typeKey ] || {};
+				
+									if ( Object.values( questType ).length ) {
+										var result = {
+											id: questKey + typeKey
+											, name: quest.name
+											, level: ( questType.normal || questType.casual ).level
+										};
+				
+										Object.keys( questType ).forEach( function ( difficultyKey ) {
+											var difficulty = questType[ difficultyKey ];
+				
+											result[ difficultyKey ] = {
+												experience: difficulty.xp
+											};
+										} );
+				
+										results.push( result );
+									}
+								} );
+							} );
+			
+							results.sort( function ( a, b ) {
+								return a.level - b.level || a.name.localeCompare( b.name );
+							} );
+			
+							resolve( functions.respondWith( results, 200 ) );
+						}
+						, function () {
+							reject( functions.respondWith( [], 500 ) );
+						}
+					);
+				} );
+			}
+			, retrieveHeroicQuests: function () {
+				return new Promise( function ( resolve, reject ) {
+					functions.retrieveQuests().then(
+						function ( quests ) {
+							var results = [];
+
+							Object.keys( quests ).forEach( function ( questKey ) {
+								var quest = quests[ questKey ];
+								var questType = quest.heroic || {};
+			
+								if ( Object.values( questType ).length ) {
+									var result = {
+										id: questKey + 'heroic'
+										, name: quest.name
+										, level: ( questType.normal || questType.casual ).level
+									};
+			
+									Object.keys( questType ).forEach( function ( difficultyKey, index ) {
+										var difficulty = questType[ difficultyKey ];
+			
+										result[ difficultyKey ] = {
+											experience: difficulty.xp
+										};
+									} );
+			
+									results.push( result );
+								}
+							} );
+			
+							results.sort( function ( a, b ) {
+								return a.level - b.level || a.name.localeCompare( b.name );
+							} );
+			
+							resolve( functions.respondWith( results, 200 ) );
+						}
+						, function () {
+							reject( functions.respondWith( [], 500 ) );
+						}
+					);
+				} );
+			}
 		};
 	
 		return api;
@@ -133,5 +230,8 @@ workbox.routing.registerRoute(/\/assets\/styles\/(.*)/, workbox.strategies.stale
 
 	workbox.routing.registerRoute( /api\/initialize/, QuestTracker.initialize, 'GET' );
 	workbox.routing.registerRoute( /api\/registered/, QuestTracker.registered, 'HEAD' );
+
+	workbox.routing.registerRoute( /api\/quests/, QuestTracker.retrieveAllQuests, 'GET' );
+	workbox.routing.registerRoute( /api\/quests\/type\/heroic/, QuestTracker.retrieveHeroicQuests, 'GET' );
 }() );
 
