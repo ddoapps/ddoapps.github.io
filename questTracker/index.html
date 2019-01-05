@@ -48,7 +48,8 @@
 			.display-block { display: block; }
 			.display-inline-block { display: inline-block; }
 			.display-none { display: none; }
-			.firstRender .startButton {
+			.fade-in { animation: fadeIn 1.5s; }
+			.firstRender .refreshButton, .firstRender .startButton {
 				background-color: rgb(96, 96, 96);
 				border-color: rgb(128, 128, 128);
 				min-width: 200px;
@@ -66,8 +67,13 @@
 			.push-down-8 { margin-top: 8px; }
 			.push-down-20 { margin-top: 20px; }
 			.push-right-8 { margin-left: 8px; }
-			.startButton { line-height: 32px; }
+			.refreshButton, .startButton { line-height: 32px; }
 			.text-center { text-align: center; }
+
+			@keyframes fadeIn {
+				from { opacity: 0; }
+				to { opacity: 100%; }
+			}
 		</style>
 	</head>
 
@@ -100,24 +106,29 @@
 				</p>
 
 				<p class="bootsequence applicationRegistrationFailure font-color-light-red display-none no-margin" aria-hidden="true">
-					Unable to Register Application
+					Unable to Register the Application
 				</p>
 
-				<p class="bootsequence refreshPageForFirstRun display-none no-margin" aria-hidden="true">
-					Application Registered<br>Refreshing page in 15 seconds...
+				<p class="bootsequence applicationRegistrationSuccess display-none no-margin" aria-hidden="true">
+					Application Registered
 				</p>
+
+				<button class="refreshButton border-radius-4 center display-none font-color-black font-size-x1-5 line-height-2 push-down-8" aria-hidden="true"
+						aria-label="Refresh Application.  Click this button to refresh the application.">
+					Refresh the Application
+				</button>
 		
 				<p class="bootsequence initializing display-none no-margin" aria-hidden="true">
-					Initializing Application
+					Initializing the Application
 				</p>
 
 				<p class="bootsequence initializingFailure font-color-light-red display-none no-margin" aria-hidden="true">
-					Unable to Initialize Application
+					Unable to Initialize the Application
 				</p>
 
 				<button class="startButton border-radius-4 center display-none font-color-black font-size-x1-5 line-height-2 push-down-8" aria-hidden="true"
 						aria-label="Start Application.  Click this button to start the application.">
-					Start Application
+					Start the Application
 				</button>
 			</section>
 
