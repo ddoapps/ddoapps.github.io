@@ -1,4 +1,4 @@
-importScripts("precache-manifest.ddfdc40861062b45557418d0738a5fe1.js", "https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
+importScripts("precache-manifest.42b5400ea66471c2e20b71655fbee6b6.js", "https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 workbox.skipWaiting();
 workbox.clientsClaim();
@@ -108,7 +108,6 @@ workbox.clientsClaim();
 	
 		var functions = {
 			retrieveQuests: function () {
-				console.log( 'query cache' );
 				return allQuestsPromise = new Promise( function ( resolve, reject ) {
 					caches.open( workbox.core.cacheNames.precache ).then( function ( cache ) {
 						cache.keys().then( function ( cacheKeys ) {
