@@ -6,97 +6,41 @@
 		<meta content="width=device-width, initial-scale=1" name="viewport">
 		<meta content="#282828" name="theme-color">
 		<meta content="Dungeons and Dragons Online Quest Tracker" name="Description">
-
-		<title>
-			DDO Quest Tracker
-		</title>
-
+		<title>DDO Quest Tracker</title>
 		<link rel="manifest" href="./assets/jsons/manifest.json">
 
 		<script>
-			//firefox currently has link rel="preload" disabled
-			//delay loading of stylesheets until after load, until this issue is fixed
-			//Ref. https://bugzilla.mozilla.org/show_bug.cgi?id=1405761
-			window.addEventListener('load', function(){
+			//firefox currently has link rel="preload" disabled delay loading of stylesheets until after load, until this issue is fixed ( ref. https://bugzilla.mozilla.org/show_bug.cgi?id=1405761 )
+			window.addEventListener( 'load', function () {
 				document.head.innerHTML += [
-					'<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans">'
-					,'<link rel="stylesheet" href="./assets/styles/vendor/fontello/css/fontello.css">'
-                ].join('');
-			});
+					  '<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans">'
+					, '<link rel="stylesheet" href="./assets/styles/vendor/fontello/css/fontello.css">'
+                ].join( '' );
+			} );
 		</script>
+	<link href="main.css" rel="stylesheet"></head>
 
-		<style>
-			body {
-				font-family: 'Open Sans', sans-serif;
-				max-width: 100vw;
-				min-height: 100vh;
-				min-width: 360px;
-			}
-
-			h1, h2, h3, h4, h5, h6 {
-				font-size: inherit;
-				font-weight: inherit;
-				margin: 0;
-			}
-
-			.background-color-light-black { background-color: rgb(16, 16, 16); }
-			.border-radius-4 { border-radius: 4px; }
-			.center {
-				margin-left: auto;
-				margin-right: auto;
-			}
-			.display-block { display: block; }
-			.display-inline-block { display: inline-block; }
-			.display-none { display: none; }
-			.fade-in { animation: fadeIn 1.5s; }
-			.firstRender .refreshButton, .firstRender .startButton {
-				background-color: rgb(96, 96, 96);
-				border-color: rgb(128, 128, 128);
-				min-width: 200px;
-			}
-			.font-color-black { color: rgb(0, 0, 0); }
-			.font-color-light-red { color: rgb(224, 0, 0); }
-			.font-color-white { color: rgb(224, 224, 224); }
-			.font-size-x1 { font-size: 12px; }
-			.font-size-x1-3 { font-size: 16px; }
-			.font-size-x1-5 { font-size: 18px; }
-			.font-size-x2 { font-size: 24px; }
-			.line-height-3 { line-height: 3; }
-			.no-margin { margin: 0; }
-			.no-wrap { white-space: nowrap; }
-			.push-down-8 { margin-top: 8px; }
-			.push-down-20 { margin-top: 20px; }
-			.push-right-8 { margin-left: 8px; }
-			.text-center { text-align: center; }
-
-			@keyframes fadeIn {
-				from { opacity: 0; }
-				to { opacity: 100%; }
-			}
-		</style>
-	</head>
-
-	<body class="background-color-light-black font-size-x1 no-margin">
+	<body class="background-color-light-black-0 default-font-family font-size-100 max-width-100vw min-height-100vh min-width-360px no-margin">
 		<span aria-live="polite">
 			<section class="application"></section>
 		</span>
 
-		<section class="firstRender font-color-white font-size-x2 push-down-8 text-center">
+		<section class="firstRender font-color-white-0 font-size-200 margin-top-8px text-center">
 			<aside aria-hidden="true">
 				<img src="./assets/images/icons/d20Icon_192x192.png" id="firstRenderLogo">
 				<label for="firstRenderLogo" class="display-block">DDO Quest Tracker</label>
 			</aside>
 
-			<section class="font-size-x1-5" aria-live="polite">
+			<section class="font-size-150" aria-live="polite">
 				<noscript>
-					<p class="font-color-light-red">Please enable javascript <span class="no-wrap">to use this application</span></p>
+					<p class="font-color-light-red-0">Please enable javascript <span class="no-wrap">to use this application</span></p>
 				</noscript>
 
-				<p class="bootsequence unsupportedBrowser display-none no-margin push-down-20" aria-hidden="true">
+				<p class="bootsequence unsupportedBrowser display-none no-margin margin-top-20px" aria-hidden="true">
 					Unsupported Browser
 				</p>
 
-				<p class="bootsequence checkForExistingApplication display-none no-margin push-down-20" aria-hidden="true">
+				<p class="bootsequence checkForExistingApplication display-none no-margin margin-top-20px" aria-hidden="true">
 					Checking for Existing Application
 				</p>
 
@@ -112,7 +56,7 @@
 					Application Registered
 				</p>
 
-				<button class="refreshButton border-radius-4 center display-none font-color-black font-size-x1-5 line-height-3 push-down-8" aria-hidden="true"
+				<button class="refreshButton background-color-dark-gray-25 border-color-gray-0 border-radius-4 center display-none font-color-black-0 font-size-150 line-height-3 margin-top-8px min-width-200px" aria-hidden="true"
 						aria-label="Refresh Application.  Click this button to refresh the application.">
 					Refresh the Application
 				</button>
@@ -125,26 +69,26 @@
 					Unable to Initialize the Application
 				</p>
 
-				<button class="startButton border-radius-4 center display-none font-color-black font-size-x1-5 line-height-3 push-down-8" aria-hidden="true"
+				<button class="startButton background-color-dark-gray-25 border-color-gray-0 border-radius-4 center display-none font-color-black-0 font-size-150 line-height-3 margin-top-8px min-width-200px" aria-hidden="true"
 						aria-label="Start Application.  Click this button to start the application.">
 					Start the Application
 				</button>
 			</section>
 
-			<footer class="font-size-x1-3 push-down-20">
-				<h1 class="font-size-x2">Supported Browsers</h1>
+			<footer class="font-size-130 margin-top-20px">
+				<h1 class="font-size-200 font-size-inherit font-weight-inherit no-margin">Supported Browsers</h1>
 
-				<h2 class="display-inline-block" aria-label="Google Chrome">
+				<h2 class="display-inline-block font-size-inherit font-weight-inherit no-margin" aria-label="Google Chrome">
 					<i class="browser-icon icon-chrome"></i>
 					<span>Chrome</span>
 				</h2>
 
-				<h2 class="display-inline-block push-right-8" aria-label="Mozilla Firefox">
+				<h2 class="display-inline-block font-size-inherit font-weight-inherit margin-left-8px no-margin" aria-label="Mozilla Firefox">
 					<i class="browser-icon icon-firefox"></i>
 					<span>Firefox</span>
 				</h2>
 
-				<h2 class="font-size-x1-5 push-down-20">
+				<h2 class="font-size-150 font-size-inherit font-weight-inherit margin-top-20px no-margin">
 					Having trouble?  Checkout the <a href="https://github.com/ddoapps/quest-tracker" target="_new">FAQ</a>
 				</h2>
 			</footer>
