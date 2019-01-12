@@ -1,4 +1,4 @@
-importScripts("precache-manifest.87ac8a1dde5d2db563da580ab52bfca4.js", "https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
+importScripts("precache-manifest.b87b81a522f9539fefc63fc50a68c1b9.js", "https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 workbox.skipWaiting();
 workbox.clientsClaim();
@@ -31,6 +31,8 @@ workbox.clientsClaim();
 
 	workbox.routing.registerRoute(/^http[s]?:\/\/fonts.googleapis.com\/(.*)/, workbox.strategies.staleWhileRevalidate(), 'GET');
 	workbox.routing.registerRoute(/^http[s]?:\/\/fonts.gstatic.com\/(.*)/, workbox.strategies.staleWhileRevalidate(), 'GET');
+	
+	workbox.routing.registerRoute(/\/assets\/styles\/vendor\/fontello\/font\/(.+)[.](.+)[?](.+)$/, workbox.strategies.staleWhileRevalidate(), 'GET');
 }() );
 
 ( function () {
