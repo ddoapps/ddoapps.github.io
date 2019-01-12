@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en-US">
+	<head>
+		<meta charset="utf-8">
+		<meta content="ie=edge" http-equiv="x-ua-compatible">
+		<meta content="width=device-width, initial-scale=1" name="viewport">
+		<meta content="#282828" name="theme-color">
+		<meta content="Dungeons and Dragons Online Quest Tracker" name="Description">
+
+		<title>
+			DDO Quest Tracker
+		</title>
+
+		<link rel="manifest" href="./assets/jsons/manifest.json">
+
+		<script>
+			//firefox currently has link rel="preload" disabled
+			//delay loading of stylesheets until after load, until this issue is fixed
+			//Ref. https://bugzilla.mozilla.org/show_bug.cgi?id=1405761
+			window.addEventListener('load', function(){
+				document.head.innerHTML += [
+					'<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans">'
+					,'<link rel="stylesheet" href="./assets/styles/vendor/fontello/css/fontello.css">'
+                ].join('');
+			});
+		</script>
+
+		<style>
+			body {
+				font-family: 'Open Sans', sans-serif;
+				max-width: 100vw;
+				min-height: 100vh;
+				min-width: 360px;
+			}
+
+			h1, h2, h3, h4, h5, h6 {
+				font-size: inherit;
+				font-weight: inherit;
+				margin: 0;
+			}
+
+			.background-color-light-black { background-color: rgb(16, 16, 16); }
+			.border-radius-4 { border-radius: 4px; }
+			.center {
+				margin-left: auto;
+				margin-right: auto;
+			}
+			.display-block { display: block; }
+			.display-inline-block { display: inline-block; }
+			.display-none { display: none; }
+			.firstRender .startButton {
+				background-color: rgb(96, 96, 96);
+				border-color: rgb(128, 128, 128);
+			}
+			.font-color-black { color: rgb(0, 0, 0); }
+			.font-color-light-red { color: rgb(224, 0, 0); }
+			.font-color-white { color: rgb(224, 224, 224); }
+			.font-size-x1 { font-size: 12px; }
+			.font-size-x1-3 { font-size: 16px; }
+			.font-size-x1-5 { font-size: 18px; }
+			.font-size-x2 { font-size: 24px; }
+			.no-margin { margin: 0; }
+			.no-wrap { white-space: nowrap; }
+			.push-down-8 { margin-top: 8px; }
+			.push-down-20 { margin-top: 20px; }
+			.push-right-8 { margin-left: 8px; }
+			.startButton { line-height: 32px; }
+			.text-center { text-align: center; }
+		</style>
+	</head>
+
+	<body class="background-color-light-black font-size-x1 no-margin">
+		<span aria-live="polite">
+			<section class="application"></section>
+		</span>
+
+		<section class="firstRender font-color-white font-size-x2 push-down-8 text-center">
+			<aside aria-hidden="true">
+				<img src="./assets/images/icons/d20Icon_192x192.png" id="firstRenderLogo">
+				<label for="firstRenderLogo" class="display-block">DDO Quest Tracker</label>
+			</aside>
+
+			<section class="font-size-x1-5" aria-live="polite">
+				<noscript>
+					<p class="font-color-light-red">Please enable javascript <span class="no-wrap">to use this application</span></p>
+				</noscript>
+
+				<p class="bootsequence unsupportedBrowser display-none no-margin push-down-20" aria-hidden="true">
+					Unsupported Browser
+				</p>
+
+				<p class="bootsequence checkForExistingApplication display-none no-margin push-down-20" aria-hidden="true">
+					Checking for Existing Application
+				</p>
+
+				<p class="bootsequence waitForApplicationRegistration display-none no-margin" aria-hidden="true">
+					Waiting for Application Registration
+				</p>
+
+				<p class="bootsequence applicationRegistrationFailure font-color-light-red display-none no-margin" aria-hidden="true">
+					Unable to Register Application
+				</p>
+
+				<p class="bootsequence refreshPageForFirstRun display-none no-margin" aria-hidden="true">
+					Application Registered<br>Refreshing page in 15 seconds...
+				</p>
+		
+				<p class="bootsequence initializing display-none no-margin" aria-hidden="true">
+					Initializing Application
+				</p>
+
+				<p class="bootsequence initializingFailure font-color-light-red display-none no-margin" aria-hidden="true">
+					Unable to Initialize Application
+				</p>
+
+				<button class="startButton border-radius-4 center font-color-black display-none font-size-x1-5 push-down-8" aria-hidden="true"
+						aria-label="Start Application.  Click this button to start the application.">
+					Start Application
+				</button>
+			</section>
+
+			<footer class="font-size-x1-3 push-down-20">
+				<h1 class="font-size-x2">Supported Browsers</h1>
+
+				<h2 class="display-inline-block" aria-label="Google Chrome">
+					<i class="browser-icon icon-chrome"></i>
+					<span>Chrome</span>
+				</h2>
+
+				<h2 class="display-inline-block push-right-8" aria-label="Mozilla Firefox">
+					<i class="browser-icon icon-firefox"></i>
+					<span>Firefox</span>
+				</h2>
+
+				<h2 class="font-size-x1-5 push-down-20">
+					Having trouble?  Checkout the <a href="https://github.com/ddoapps/quest-tracker" target="_new">FAQ</a>
+				</h2>
+			</footer>
+		</section>
+	<script type="text/javascript" src="main.js"></script></body>
+</html>
