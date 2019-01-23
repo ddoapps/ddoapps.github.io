@@ -1,4 +1,4 @@
-importScripts("precache-manifest.ba095bc4f29f2f80dd170d38b3f85bcd.js", "https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
+importScripts("precache-manifest.dbf2fdbcd13f98c6cc43416cc3b33dd3.js", "https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 workbox.skipWaiting();
 workbox.clientsClaim();
@@ -107,17 +107,18 @@ workbox.clientsClaim();
 	let QuestTracker = ( function () {
 		var database;
 		var allQuestsPromise;
+		var allSagasPromise;
 	
 		var functions = {
-			retrieveQuests: function () {
-				return allQuestsPromise = new Promise( function ( resolve, reject ) {
+			retrieveJsonFromPreCache: function ( fileName ) {
+				return new Promise( function ( resolve, reject ) {
 					caches.open( workbox.core.cacheNames.precache ).then( function ( cache ) {
 						cache.keys().then( function ( cacheKeys ) {
-							var questsKey = cacheKeys.find( function ( element ) {
-								return element.url.endsWith( 'quests.json' );
+							var cacheKey = cacheKeys.find( function ( element ) {
+								return element.url.endsWith( fileName );
 							} );
 
-							cache.match( questsKey ).then( function ( response ) {
+							cache.match( cacheKey ).then( function ( response ) {
 								response.json().then( function ( json ) {
 									resolve( json );
 								} );
@@ -125,6 +126,12 @@ workbox.clientsClaim();
 						} );
 					} );
 				} );
+			}
+			, retrieveQuests: function () {
+				return allQuestsPromise = functions.retrieveJsonFromPreCache( 'quests.json' );
+			}
+			, retrieveSagas: function () {
+				return allSagasPromise = functions.retrieveJsonFromPreCache( 'sagas.json' );
 			}
 			, respondWith: function ( data, status ) {
 				if ( status == 204 ) {
@@ -146,6 +153,22 @@ workbox.clientsClaim();
 							} else {
 								results = quests;
 							}
+
+							resolve( functions.respondWith( results, 200 ) );
+						}
+						, function () {
+							reject( functions.respondWith( [], 500 ) );
+						}
+					);
+				} );
+			}
+			, searchForSagas: function ( searchCriteria ) {
+				return new Promise( function ( resolve, reject ) {
+					( allSagasPromise || functions.retrieveSagas() ).then(
+						function ( sagas ) {
+							var results = [];
+
+							results = sagas;
 
 							resolve( functions.respondWith( results, 200 ) );
 						}
@@ -191,6 +214,9 @@ workbox.clientsClaim();
 			, retrieveAllQuests: function ( event ) {
 				return functions.searchForQuests( {} );
 			}
+			, retrieveAllSagas: function ( event ) {
+				return functions.searchForSagas( {} );
+			}
 			, retrieveEpicQuests: function () {
 				return functions.searchForQuests( { type: 'epic' } );
 			}
@@ -208,5 +234,7 @@ workbox.clientsClaim();
 	workbox.routing.registerRoute( /api\/quests$/, QuestTracker.retrieveAllQuests, 'GET' );
 	workbox.routing.registerRoute( /api\/quests\/type\/epic/, QuestTracker.retrieveEpicQuests, 'GET' );
 	workbox.routing.registerRoute( /api\/quests\/type\/heroic/, QuestTracker.retrieveHeroicQuests, 'GET' );
+
+	workbox.routing.registerRoute( /api\/sagas$/, QuestTracker.retrieveAllSagas, 'GET' );
 }() );
 

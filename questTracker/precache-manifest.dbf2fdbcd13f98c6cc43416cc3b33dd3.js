@@ -1,14 +1,14 @@
 self.__precacheManifest = [
   {
-    "revision": "b5d3e3b351e4e87a894f8c0a7ce006da",
-    "url": "assets/styles/vendor/fontello/css/fontello-embedded.css"
+    "revision": "b42fea219797f6700f635d334ee6cef9",
+    "url": "assets/styles/vendor/fontello/css/fontello-ie7-codes.css"
   },
   {
-    "revision": "16552142fe47b9e9b72a",
+    "revision": "4b7d6c53b5b426e21b4b",
     "url": "main.css"
   },
   {
-    "revision": "16552142fe47b9e9b72a",
+    "revision": "4b7d6c53b5b426e21b4b",
     "url": "main.js"
   },
   {
@@ -24,16 +24,16 @@ self.__precacheManifest = [
     "url": "assets/styles/vendor/fontello/font/fontello.woff2"
   },
   {
-    "revision": "534be1241ad9da6d236fa8878e024f4a",
-    "url": "assets/styles/vendor/fontello/font/fontello.svg"
-  },
-  {
     "revision": "c8ee182ad01fb0120f26c5ced0f1bb1f",
     "url": "assets/styles/vendor/fontello/font/fontello.woff"
   },
   {
-    "revision": "25f7a6c366fab30b5f01cdce3bea1ceb",
-    "url": "assets/styles/vendor/fontello/font/fontello.eot"
+    "revision": "462d90b7c7c2316a7e273798c1cbffb0",
+    "url": "assets/styles/vendor/fontello/font/fontello.ttf"
+  },
+  {
+    "revision": "534be1241ad9da6d236fa8878e024f4a",
+    "url": "assets/styles/vendor/fontello/font/fontello.svg"
   },
   {
     "revision": "5efb6f925470166045ba28c25131f79a",
@@ -48,12 +48,12 @@ self.__precacheManifest = [
     "url": "index.html"
   },
   {
-    "revision": "b42fea219797f6700f635d334ee6cef9",
-    "url": "assets/styles/vendor/fontello/css/fontello-ie7-codes.css"
+    "revision": "b5d3e3b351e4e87a894f8c0a7ce006da",
+    "url": "assets/styles/vendor/fontello/css/fontello-embedded.css"
   },
   {
-    "revision": "462d90b7c7c2316a7e273798c1cbffb0",
-    "url": "assets/styles/vendor/fontello/font/fontello.ttf"
+    "revision": "25f7a6c366fab30b5f01cdce3bea1ceb",
+    "url": "assets/styles/vendor/fontello/font/fontello.eot"
   },
   {
     "revision": "d55a27e3a1c2756ffa87068418be0a4e",
@@ -68,11 +68,11 @@ self.__precacheManifest = [
     "url": "assets/styles/vendor/fontello/LICENSE.txt"
   },
   {
-    "revision": "713d3180c318f84dcd27f3a96f4a03a2",
+    "revision": "38d566aad27bf739a30b4ba9a40a039b",
     "url": "assets/jsons/sagas.json"
   },
   {
-    "revision": "74845f07d6c3469dc0baf38105d0e874",
+    "revision": "54832630aab7351c624e2af0ab724779",
     "url": "assets/jsons/quests.json"
   },
   {
