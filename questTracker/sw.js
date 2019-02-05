@@ -1,4 +1,4 @@
-importScripts("precache-manifest.e766c21727444059bcee37839781a68a.js", "https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
+importScripts("precache-manifest.c77fcf7ed597e0ec85157f6b058272a7.js", "https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 workbox.skipWaiting();
 workbox.clientsClaim();
@@ -106,6 +106,7 @@ workbox.clientsClaim();
 	
 	let QuestTracker = ( function () {
 		var database;
+		var allPacksPromise;
 		var allQuestsPromise;
 		var allSagasPromise;
 	
@@ -127,6 +128,9 @@ workbox.clientsClaim();
 					} );
 				} );
 			}
+			, retrievePacks: function () {
+				return allPacksPromise = functions.retrieveJsonFromPreCache( 'packs.json' );
+			}
 			, retrieveQuests: function () {
 				return allQuestsPromise = functions.retrieveJsonFromPreCache( 'quests.json' );
 			}
@@ -139,6 +143,22 @@ workbox.clientsClaim();
 				} else {
 					return new Response( JSON.stringify( data ), { status: status, headers: { 'Content-Type': 'application/json;charset=UTF-8' } } );
 				}
+			}
+			, searchForPacks: function ( searchCriteria ) {
+				return new Promise( function ( resolve, reject ) {
+					( allPacksPromise || functions.retrievePacks() ).then(
+						function ( packs ) {
+							var results = [];
+
+							results = packs;
+
+							resolve( functions.respondWith( results, 200 ) );
+						}
+						, function () {
+							reject( functions.respondWith( [], 500 ) );
+						}
+					);
+				} );
 			}
 			, searchForQuests: function ( searchCriteria ) {
 				return new Promise( function ( resolve, reject ) {
@@ -211,6 +231,9 @@ workbox.clientsClaim();
 					);
 				} );
 			}
+			, retrieveAllPacks: function ( event ) {
+				return functions.searchForPacks( {} );
+			}
 			, retrieveAllQuests: function ( event ) {
 				return functions.searchForQuests( {} );
 			}
@@ -235,6 +258,7 @@ workbox.clientsClaim();
 	workbox.routing.registerRoute( /api\/quests\/type\/epic/, QuestTracker.retrieveEpicQuests, 'GET' );
 	workbox.routing.registerRoute( /api\/quests\/type\/heroic/, QuestTracker.retrieveHeroicQuests, 'GET' );
 
+	workbox.routing.registerRoute( /api\/packs$/, QuestTracker.retrieveAllPacks, 'GET' );
 	workbox.routing.registerRoute( /api\/sagas$/, QuestTracker.retrieveAllSagas, 'GET' );
 }() );
 
