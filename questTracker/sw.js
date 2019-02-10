@@ -1,4 +1,4 @@
-importScripts("precache-manifest.c77fcf7ed597e0ec85157f6b058272a7.js", "https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
+importScripts("precache-manifest.0df37a1bc553062043ad0edee6233367.js", "https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 workbox.skipWaiting();
 workbox.clientsClaim();
@@ -129,52 +129,40 @@ workbox.clientsClaim();
 				} );
 			}
 			, retrievePacks: function () {
-				return allPacksPromise = functions.retrieveJsonFromPreCache( 'packs.json' );
+				if ( !allPacksPromise ) allPacksPromise = functions.retrieveJsonFromPreCache( 'packs.json' );
+				return allPacksPromise;
 			}
 			, retrieveQuests: function () {
-				return allQuestsPromise = functions.retrieveJsonFromPreCache( 'quests.json' );
+				if ( !allQuestsPromise ) allQuestsPromise = functions.retrieveJsonFromPreCache( 'quests.json' );
+				return allQuestsPromise;
 			}
 			, retrieveSagas: function () {
-				return allSagasPromise = functions.retrieveJsonFromPreCache( 'sagas.json' );
+				if ( !allSagasPromise ) allSagasPromise = functions.retrieveJsonFromPreCache( 'sagas.json' );
+				return allSagasPromise;
 			}
 			, respondWith: function ( data, status ) {
 				if ( status == 204 ) {
 					return new Response( null, { status: status } );
 				} else {
-					return new Response( JSON.stringify( data ), { status: status, headers: { 'Content-Type': 'application/json;charset=UTF-8' } } );
+					return new Response( JSON.stringify( data ), { status: status, headers: { 'Content-Type': 'application/json; charset=utf-8' } } );
 				}
-			}
-			, searchForPacks: function ( searchCriteria ) {
-				return new Promise( function ( resolve, reject ) {
-					( allPacksPromise || functions.retrievePacks() ).then(
-						function ( packs ) {
-							var results = [];
-
-							results = packs;
-
-							resolve( functions.respondWith( results, 200 ) );
-						}
-						, function () {
-							reject( functions.respondWith( [], 500 ) );
-						}
-					);
-				} );
 			}
 			, searchForQuests: function ( searchCriteria ) {
 				return new Promise( function ( resolve, reject ) {
-					( allQuestsPromise || functions.retrieveQuests() ).then(
-						function ( quests ) {
-							var results = [];
+					Promise.all( [ functions.retrieveQuests(), functions.retrievePacks() ] ).then(
+						function ( values ) {
+							var quests = values[ 0 ];
+							var packs = values[ 1 ];
 
-							if ( searchCriteria.type ) {
-								results = quests.filter( function ( quest ) {
-									return !!quest[ searchCriteria.type ];
+							packs.forEach( function ( pack ) {
+								pack.quests.forEach( function ( id ) {
+									quests.filter( function ( quest ) {
+										return quest.id === id;
+									} )[ 0 ].pack = pack;
 								} );
-							} else {
-								results = quests;
-							}
+							} );
 
-							resolve( functions.respondWith( results, 200 ) );
+							resolve( functions.respondWith( quests, 200 ) );
 						}
 						, function () {
 							reject( functions.respondWith( [], 500 ) );
@@ -184,13 +172,22 @@ workbox.clientsClaim();
 			}
 			, searchForSagas: function ( searchCriteria ) {
 				return new Promise( function ( resolve, reject ) {
-					( allSagasPromise || functions.retrieveSagas() ).then(
-						function ( sagas ) {
-							var results = [];
+					Promise.all( [ functions.retrieveSagas(), functions.retrievePacks() ] ).then(
+						function ( values ) {
+							var sagas = values[ 0 ];
+							var packs = values[ 1 ];
 
-							results = sagas;
+							packs.filter( function ( pack ) {
+								return pack.sagas;
+							} ).forEach( function ( pack ) {
+								pack.sagas.forEach( function ( id ) {
+									sagas.filter( function ( saga ) {
+										return saga.id === id;
+									} )[ 0 ].pack = pack;
+								} );
+							} );
 
-							resolve( functions.respondWith( results, 200 ) );
+							resolve( functions.respondWith( sagas, 200 ) );
 						}
 						, function () {
 							reject( functions.respondWith( [], 500 ) );
@@ -231,20 +228,11 @@ workbox.clientsClaim();
 					);
 				} );
 			}
-			, retrieveAllPacks: function ( event ) {
-				return functions.searchForPacks( {} );
-			}
 			, retrieveAllQuests: function ( event ) {
 				return functions.searchForQuests( {} );
 			}
 			, retrieveAllSagas: function ( event ) {
 				return functions.searchForSagas( {} );
-			}
-			, retrieveEpicQuests: function () {
-				return functions.searchForQuests( { type: 'epic' } );
-			}
-			, retrieveHeroicQuests: function () {
-				return functions.searchForQuests( { type: 'heroic' } );
 			}
 		};
 	
@@ -255,10 +243,6 @@ workbox.clientsClaim();
 	workbox.routing.registerRoute( /api\/registered/, QuestTracker.registered, 'HEAD' );
 
 	workbox.routing.registerRoute( /api\/quests$/, QuestTracker.retrieveAllQuests, 'GET' );
-	workbox.routing.registerRoute( /api\/quests\/type\/epic/, QuestTracker.retrieveEpicQuests, 'GET' );
-	workbox.routing.registerRoute( /api\/quests\/type\/heroic/, QuestTracker.retrieveHeroicQuests, 'GET' );
-
-	workbox.routing.registerRoute( /api\/packs$/, QuestTracker.retrieveAllPacks, 'GET' );
 	workbox.routing.registerRoute( /api\/sagas$/, QuestTracker.retrieveAllSagas, 'GET' );
 }() );
 
