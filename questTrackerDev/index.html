@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en-US">
+	<head>
+		<meta charset="utf-8">
+		<meta content="ie=edge" http-equiv="x-ua-compatible">
+		<meta content="width=device-width, initial-scale=1" name="viewport">
+		<meta content="#282828" name="theme-color">
+		<meta content="Dungeons and Dragons Online Quest Tracker" name="Description">
+		<title>DDO Quest Tracker</title>
+		<link rel="manifest" href="./assets/jsons/manifest.json">
+
+		<script>
+			//firefox currently has link rel="preload" disabled delay loading of stylesheets until after load, until this issue is fixed ( ref. https://bugzilla.mozilla.org/show_bug.cgi?id=1405761 )
+			window.addEventListener( 'load', function () {
+				document.head.innerHTML += [
+					  '<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans">'
+					, '<link rel="stylesheet" href="./assets/styles/vendor/fontello/css/fontello.css">'
+				].join( '' );
+				document.getElementById( 'firstRenderLogo' ).parentNode.children[ 1 ].focus();
+			} );
+		</script>
+	<link href="main.css" rel="stylesheet"></head>
+
+	<body class="background-color-light-black-0 default-font-family font-size-100 max-width-100vw min-height-100vh min-width-360px no-margin">
+		<span aria-live="polite">
+			<section class="application"></section>
+		</span>
+
+		<section class="firstRender font-color-white-0 font-size-200 margin-top-8px text-center">
+			<aside>
+				<img src="./assets/images/icons/d20Icon_192x192.png" id="firstRenderLogo" aria-hidden="true">
+				<label for="firstRenderLogo" class="display-block" tabindex="1" autofocus>DDO Quest Tracker</label>
+			</aside>
+
+			<section class="font-size-150" aria-live="polite">
+				<noscript>
+					<p class="font-color-light-red-0" tabindex="0">Please enable javascript <span class="no-wrap">to use this application</span></p>
+				</noscript>
+
+				<p class="bootsequence unsupportedBrowser display-none no-margin margin-top-20px" aria-hidden="true" tabindex="0">
+					Unsupported Browser
+				</p>
+
+				<p class="bootsequence checkForExistingApplication display-none no-margin margin-top-20px" aria-hidden="true" tabindex="0">
+					Checking for Existing Application
+				</p>
+
+				<p class="bootsequence waitForApplicationRegistration display-none no-margin" aria-hidden="true" tabindex="0">
+					Waiting for Application Registration
+				</p>
+
+				<p class="bootsequence applicationRegistrationFailure font-color-light-red display-none no-margin" aria-hidden="true" tabindex="0">
+					Unable to Register the Application
+				</p>
+
+				<p class="bootsequence applicationRegistrationSuccess display-none no-margin" aria-hidden="true" tabindex="0">
+					Application Registered
+				</p>
+
+				<button class="refreshButton background-color-dark-gray-25 border-color-gray-0 border-radius-4px center display-none font-color-black-0 font-size-150 line-height-3 margin-top-8px min-width-200px" aria-hidden="true"
+						aria-label="Refresh Application.  Click this button to refresh the application." tabindex="0">
+					Refresh the Application
+				</button>
+		
+				<p class="bootsequence initializing display-none no-margin" aria-hidden="true" tabindex="0">
+					Initializing the Application
+				</p>
+
+				<p class="bootsequence initializingFailure font-color-light-red display-none no-margin" aria-hidden="true" tabindex="0">
+					Unable to Initialize the Application
+				</p>
+
+				<button class="startButton background-color-dark-gray-25 border-color-gray-0 border-radius-4px center display-none font-color-black-0 font-size-150 line-height-3 margin-top-8px min-width-200px" aria-hidden="true"
+						aria-label="Start Application.  Click this button to start the application." tabindex="0">
+					Start the Application
+				</button>
+			</section>
+
+			<footer class="font-size-130 margin-top-20px">
+				<h1 class="font-size-200 font-size-inherit font-weight-inherit no-margin" tabindex="0">Supported Browsers</h1>
+
+				<h2 class="display-inline-block font-size-inherit font-weight-inherit no-margin" aria-label="Google Chrome" tabindex="0">
+					<i class="browser-icon icon-chrome"></i>
+					<span>Chrome</span>
+				</h2>
+
+				<h2 class="display-inline-block font-size-inherit font-weight-inherit margin-left-8px no-margin" aria-label="Mozilla Firefox" tabindex="0">
+					<i class="browser-icon icon-firefox"></i>
+					<span>Firefox</span>
+				</h2>
+
+				<h2 class="display-block font-size-100 font-weight-inherit no-margin" aria-label="Supported browsers does not include Apple iOS.  Please try Safari in Apple iOS" tabindex="0">
+					*Does not include iOS.  Please try Safari in iOS
+				</h2>
+
+				<h2 class="font-size-150 font-size-inherit font-weight-inherit margin-top-20px no-margin" tabindex="0">
+					Having trouble?  Checkout the <a href="https://github.com/ddoapps/quest-tracker" target="_new" aria-label="Frequently Asked Questions">FAQ</a>
+				</h2>
+			</footer>
+		</section>
+	<script type="text/javascript" src="main.js"></script></body>
+</html>
