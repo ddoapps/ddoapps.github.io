@@ -1,19 +1,19 @@
 self.__precacheManifest = [
   {
-    "revision": "b5d3e3b351e4e87a894f8c0a7ce006da",
-    "url": "assets/styles/vendor/fontello/css/fontello-embedded.css"
+    "revision": "d4323816f338cc006a74a540fad4c1bc",
+    "url": "assets/styles/vendor/fontello/css/fontello-codes.css"
   },
   {
-    "revision": "b54b9a761d7bb4652334",
+    "revision": "1db2db73ba2ae7c4ba2b",
     "url": "main.css"
   },
   {
-    "revision": "b54b9a761d7bb4652334",
+    "revision": "1db2db73ba2ae7c4ba2b",
     "url": "main.js"
   },
   {
-    "revision": "d4323816f338cc006a74a540fad4c1bc",
-    "url": "assets/styles/vendor/fontello/css/fontello-codes.css"
+    "revision": "b5d3e3b351e4e87a894f8c0a7ce006da",
+    "url": "assets/styles/vendor/fontello/css/fontello-embedded.css"
   },
   {
     "revision": "eebbe0b838af5f76d3936f1bbf3de119",
@@ -68,7 +68,7 @@ self.__precacheManifest = [
     "url": "assets/styles/vendor/fontello/LICENSE.txt"
   },
   {
-    "revision": "38d566aad27bf739a30b4ba9a40a039b",
+    "revision": "7fd1ec2cdf448ed529ad2810a82d982e",
     "url": "assets/jsons/sagas.json"
   },
   {
