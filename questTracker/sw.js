@@ -1,4 +1,4 @@
-importScripts("precache-manifest.2704ec02a9f24a0cd14c2737fc6aa7d8.js", "https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
+importScripts("precache-manifest.ce3e21f49d82c5e59099e9af70a32b82.js", "https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 'use strict';
 
@@ -207,6 +207,11 @@ const HEAD = 'HEAD';
 			, retrieveAllSagas () {
 				return functions.searchForSagas();
 			}
+			, unregister () {
+				return new Promise( resolve => {
+					self.registration.unregister().then( () => resolve( functions.respondWith( {}, 200 ) ) );
+				} );
+			}
 		};
 	
 		return api;
@@ -214,6 +219,7 @@ const HEAD = 'HEAD';
 
 	workbox.routing.registerRoute( /api\/initialize/, QuestTracker.initialize, GET );
 	workbox.routing.registerRoute( /api\/registered/, QuestTracker.registered, HEAD );
+	workbox.routing.registerRoute( /api\/unregister/, QuestTracker.unregister, HEAD );
 
 	workbox.routing.registerRoute( /api\/quests$/, QuestTracker.retrieveAllQuests, GET );
 	workbox.routing.registerRoute( /api\/sagas$/, QuestTracker.retrieveAllSagas, GET );
