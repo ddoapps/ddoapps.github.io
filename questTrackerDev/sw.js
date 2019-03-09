@@ -1,4 +1,4 @@
-importScripts("precache-manifest.88cec7c026b2fd7ec0b796dcc735ac14.js", "https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
+importScripts("precache-manifest.e013f3289334719df35d38348a9f9bfd.js", "https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 'use strict';
 
@@ -21,7 +21,7 @@ const HEAD = 'HEAD';
 
 				return Promise.all(
 					cacheNames
-						.filter( cacheName => !validCacheSet.has(cacheName) )
+						.filter( cacheName => !validCacheSet.has( cacheName ) )
 						.map( cacheName => caches.delete( cacheName ) )
 				);
 			} )
@@ -209,7 +209,17 @@ const HEAD = 'HEAD';
 			}
 			, unregister () {
 				return new Promise( resolve => {
-					self.registration.unregister().then( () => resolve( functions.respondWith( {}, 200 ) ) );
+					caches.keys().then( cacheNames => {
+						Promise.all(
+							cacheNames
+								.filter( cacheName => cacheName.indexOf( 'workbox' ) > -1 )
+								.map( cacheName => caches.delete( cacheName ) )
+						).then(
+							self.registration.unregister().then(
+								() => resolve( functions.respondWith( {}, 200 ) )
+							)
+						)
+					} );
 				} );
 			}
 		};
