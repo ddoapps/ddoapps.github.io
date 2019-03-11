@@ -4,15 +4,15 @@ self.__precacheManifest = [
     "url": "assets/styles/vendor/fontello/css/animation.css"
   },
   {
-    "revision": "a467ba6eb9ed70efe134",
+    "revision": "f5e3b729c047d20f94c9",
     "url": "main.css"
   },
   {
-    "revision": "a467ba6eb9ed70efe134",
+    "revision": "f5e3b729c047d20f94c9",
     "url": "main.js"
   },
   {
-    "revision": "b5d3e3b351e4e87a894f8c0a7ce006da",
+    "revision": "7a3bea09f3fc2ce52864f13f69a2bf5c",
     "url": "assets/styles/vendor/fontello/css/fontello-embedded.css"
   },
   {
@@ -20,31 +20,31 @@ self.__precacheManifest = [
     "url": "assets/styles/vendor/fontello/README.txt"
   },
   {
-    "revision": "25f7a6c366fab30b5f01cdce3bea1ceb",
-    "url": "assets/styles/vendor/fontello/font/fontello.eot"
-  },
-  {
-    "revision": "64dc4203fef6ea0bb7cdc9a5ff59dd43",
+    "revision": "6c0c0465110ec4d794b99d2a99c50655",
     "url": "assets/styles/vendor/fontello/font/fontello.woff2"
   },
   {
-    "revision": "c8ee182ad01fb0120f26c5ced0f1bb1f",
+    "revision": "c639a492a367a6ed4c7b563260292c70",
     "url": "assets/styles/vendor/fontello/font/fontello.woff"
   },
   {
-    "revision": "462d90b7c7c2316a7e273798c1cbffb0",
+    "revision": "5791976e0a2596b7575102b3be0d43c8",
     "url": "assets/styles/vendor/fontello/font/fontello.ttf"
   },
   {
-    "revision": "534be1241ad9da6d236fa8878e024f4a",
+    "revision": "45e72417cab453051593683fc17b9b51",
     "url": "assets/styles/vendor/fontello/font/fontello.svg"
   },
   {
-    "revision": "18e55f5502d52e35f665af6faa3e5ce0",
+    "revision": "17f6f6b4e3a586284bb1bc136b65a8b8",
+    "url": "assets/styles/vendor/fontello/font/fontello.eot"
+  },
+  {
+    "revision": "758bdca282f174c7cdc45378ca510904",
     "url": "assets/styles/vendor/fontello/config.json"
   },
   {
-    "revision": "d4323816f338cc006a74a540fad4c1bc",
+    "revision": "def24082f9cd234d120b87e2a6921b68",
     "url": "assets/styles/vendor/fontello/css/fontello-codes.css"
   },
   {
@@ -52,15 +52,15 @@ self.__precacheManifest = [
     "url": "index.html"
   },
   {
-    "revision": "69c26dc61b2ad85e226052e8ec944871",
+    "revision": "7e9c67dea7f5b4ea77149f2baaf95aa8",
     "url": "assets/styles/vendor/fontello/css/fontello.css"
   },
   {
-    "revision": "b42fea219797f6700f635d334ee6cef9",
+    "revision": "53b3c7e34450bf9b6ec8c50936de2328",
     "url": "assets/styles/vendor/fontello/css/fontello-ie7-codes.css"
   },
   {
-    "revision": "d55a27e3a1c2756ffa87068418be0a4e",
+    "revision": "b73cc30d5cbcf2b9537be58df8f2f980",
     "url": "assets/styles/vendor/fontello/css/fontello-ie7.css"
   },
   {
