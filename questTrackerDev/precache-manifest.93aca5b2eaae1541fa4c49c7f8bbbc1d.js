@@ -4,16 +4,16 @@ self.__precacheManifest = [
     "url": "assets/styles/vendor/fontello/css/fontello-codes.css"
   },
   {
-    "revision": "774e8568ac0570ced53b",
+    "revision": "0085ccbd8ed3ad1b2c1f",
     "url": "main.css"
   },
   {
-    "revision": "774e8568ac0570ced53b",
+    "revision": "0085ccbd8ed3ad1b2c1f",
     "url": "main.js"
   },
   {
-    "revision": "7a3bea09f3fc2ce52864f13f69a2bf5c",
-    "url": "assets/styles/vendor/fontello/css/fontello-embedded.css"
+    "revision": "b73cc30d5cbcf2b9537be58df8f2f980",
+    "url": "assets/styles/vendor/fontello/css/fontello-ie7.css"
   },
   {
     "revision": "eebbe0b838af5f76d3936f1bbf3de119",
@@ -24,20 +24,20 @@ self.__precacheManifest = [
     "url": "assets/styles/vendor/fontello/font/fontello.woff2"
   },
   {
-    "revision": "5791976e0a2596b7575102b3be0d43c8",
-    "url": "assets/styles/vendor/fontello/font/fontello.ttf"
+    "revision": "7e9c67dea7f5b4ea77149f2baaf95aa8",
+    "url": "assets/styles/vendor/fontello/css/fontello.css"
   },
   {
     "revision": "c639a492a367a6ed4c7b563260292c70",
     "url": "assets/styles/vendor/fontello/font/fontello.woff"
   },
   {
-    "revision": "45e72417cab453051593683fc17b9b51",
-    "url": "assets/styles/vendor/fontello/font/fontello.svg"
+    "revision": "5791976e0a2596b7575102b3be0d43c8",
+    "url": "assets/styles/vendor/fontello/font/fontello.ttf"
   },
   {
-    "revision": "17f6f6b4e3a586284bb1bc136b65a8b8",
-    "url": "assets/styles/vendor/fontello/font/fontello.eot"
+    "revision": "45e72417cab453051593683fc17b9b51",
+    "url": "assets/styles/vendor/fontello/font/fontello.svg"
   },
   {
     "revision": "758bdca282f174c7cdc45378ca510904",
@@ -48,20 +48,20 @@ self.__precacheManifest = [
     "url": "assets/styles/vendor/fontello/css/animation.css"
   },
   {
-    "revision": "552ba85815935179cdbf0151760d3c29",
+    "revision": "71ac7510909f7600273dfb6701b337c0",
     "url": "index.html"
   },
   {
-    "revision": "b73cc30d5cbcf2b9537be58df8f2f980",
-    "url": "assets/styles/vendor/fontello/css/fontello-ie7.css"
+    "revision": "17f6f6b4e3a586284bb1bc136b65a8b8",
+    "url": "assets/styles/vendor/fontello/font/fontello.eot"
+  },
+  {
+    "revision": "7a3bea09f3fc2ce52864f13f69a2bf5c",
+    "url": "assets/styles/vendor/fontello/css/fontello-embedded.css"
   },
   {
     "revision": "53b3c7e34450bf9b6ec8c50936de2328",
     "url": "assets/styles/vendor/fontello/css/fontello-ie7-codes.css"
-  },
-  {
-    "revision": "7e9c67dea7f5b4ea77149f2baaf95aa8",
-    "url": "assets/styles/vendor/fontello/css/fontello.css"
   },
   {
     "revision": "c5571948164c09802c8aeab74c79b204",
@@ -76,7 +76,7 @@ self.__precacheManifest = [
     "url": "assets/jsons/quests.json"
   },
   {
-    "revision": "eaf6021a8732bbf849986fa6954e9141",
+    "revision": "7b780d49ac3e1a128c89c208c3cef303",
     "url": "assets/jsons/packs.json"
   },
   {
