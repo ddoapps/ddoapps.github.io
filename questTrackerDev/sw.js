@@ -1,4 +1,4 @@
-importScripts("precache-manifest.cc3c68d9b5b08857f0938a8d6a91d00c.js", "https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
+importScripts("precache-manifest.b8d3739d5269f66c26eaeb391154ecc4.js", "https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 'use strict';
 
@@ -132,6 +132,14 @@ const HEAD = 'HEAD';
 
 				return new Response( JSON.stringify( data ), { status: status, headers: { 'Content-Type': 'application/json; charset=utf-8' } } );
 			}
+			, searchForAdventurePacks () {
+				return new Promise( ( resolve, reject ) => {
+					functions.retrievePacks().then(
+						packs => resolve( functions.respondWith( packs, 200 ) )
+						, () => reject( functions.respondWith( [], 500 ) )
+					);
+				} );
+			}
 			, searchForQuests () {
 				return new Promise( ( resolve, reject ) => {
 					Promise.all( [ functions.retrieveQuests(), functions.retrievePacks() ] ).then(
@@ -189,6 +197,15 @@ const HEAD = 'HEAD';
 			, registered () {
 				return new Promise( resolve => resolve( functions.respondWith( {}, 200 ) ) );
 			}
+			, retrieveAllAdventurePacks () {
+				return functions.searchForAdventurePacks();
+			}
+			, retrieveAllQuests () {
+				return functions.searchForQuests();
+			}
+			, retrieveAllSagas () {
+				return functions.searchForSagas();
+			}
 			, retrieveCharacters () {
 				return new Promise( ( resolve, reject ) => {
 					database.getCollection( 'characters' ).findAll().then(
@@ -200,12 +217,6 @@ const HEAD = 'HEAD';
 						, () => reject( functions.respondWith( {}, 500 ) )
 					);
 				} );
-			}
-			, retrieveAllQuests () {
-				return functions.searchForQuests();
-			}
-			, retrieveAllSagas () {
-				return functions.searchForSagas();
 			}
 			, unregister () {
 				return new Promise( resolve => {
@@ -231,6 +242,7 @@ const HEAD = 'HEAD';
 	workbox.routing.registerRoute( /api\/registered/, QuestTracker.registered, HEAD );
 	workbox.routing.registerRoute( /api\/unregister/, QuestTracker.unregister, HEAD );
 
+	workbox.routing.registerRoute( /api\/packs$/, QuestTracker.retrieveAllAdventurePacks, GET );
 	workbox.routing.registerRoute( /api\/quests$/, QuestTracker.retrieveAllQuests, GET );
 	workbox.routing.registerRoute( /api\/sagas$/, QuestTracker.retrieveAllSagas, GET );
 }() );
