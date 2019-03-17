@@ -1,14 +1,14 @@
 self.__precacheManifest = [
   {
-    "revision": "5efb6f925470166045ba28c25131f79a",
-    "url": "assets/styles/vendor/fontello/css/animation.css"
+    "revision": "758bdca282f174c7cdc45378ca510904",
+    "url": "assets/styles/vendor/fontello/config.json"
   },
   {
-    "revision": "b878d87d2f57d2b1ee4b",
+    "revision": "cc24ea1c5e2ffaa3ce23",
     "url": "main.css"
   },
   {
-    "revision": "b878d87d2f57d2b1ee4b",
+    "revision": "cc24ea1c5e2ffaa3ce23",
     "url": "main.js"
   },
   {
@@ -44,8 +44,8 @@ self.__precacheManifest = [
     "url": "assets/styles/vendor/fontello/css/fontello-codes.css"
   },
   {
-    "revision": "758bdca282f174c7cdc45378ca510904",
-    "url": "assets/styles/vendor/fontello/config.json"
+    "revision": "5efb6f925470166045ba28c25131f79a",
+    "url": "assets/styles/vendor/fontello/css/animation.css"
   },
   {
     "revision": "71ac7510909f7600273dfb6701b337c0",
@@ -56,12 +56,12 @@ self.__precacheManifest = [
     "url": "assets/styles/vendor/fontello/css/fontello.css"
   },
   {
-    "revision": "53b3c7e34450bf9b6ec8c50936de2328",
-    "url": "assets/styles/vendor/fontello/css/fontello-ie7-codes.css"
-  },
-  {
     "revision": "b73cc30d5cbcf2b9537be58df8f2f980",
     "url": "assets/styles/vendor/fontello/css/fontello-ie7.css"
+  },
+  {
+    "revision": "53b3c7e34450bf9b6ec8c50936de2328",
+    "url": "assets/styles/vendor/fontello/css/fontello-ie7-codes.css"
   },
   {
     "revision": "c5571948164c09802c8aeab74c79b204",
