@@ -1,14 +1,14 @@
 self.__precacheManifest = [
   {
-    "revision": "def24082f9cd234d120b87e2a6921b68",
-    "url": "assets/styles/vendor/fontello/css/fontello-codes.css"
+    "revision": "5efb6f925470166045ba28c25131f79a",
+    "url": "assets/styles/vendor/fontello/css/animation.css"
   },
   {
-    "revision": "cc80a38563de85dbb51c",
+    "revision": "b878d87d2f57d2b1ee4b",
     "url": "main.css"
   },
   {
-    "revision": "cc80a38563de85dbb51c",
+    "revision": "b878d87d2f57d2b1ee4b",
     "url": "main.js"
   },
   {
@@ -40,12 +40,12 @@ self.__precacheManifest = [
     "url": "assets/styles/vendor/fontello/font/fontello.eot"
   },
   {
-    "revision": "758bdca282f174c7cdc45378ca510904",
-    "url": "assets/styles/vendor/fontello/config.json"
+    "revision": "def24082f9cd234d120b87e2a6921b68",
+    "url": "assets/styles/vendor/fontello/css/fontello-codes.css"
   },
   {
-    "revision": "5efb6f925470166045ba28c25131f79a",
-    "url": "assets/styles/vendor/fontello/css/animation.css"
+    "revision": "758bdca282f174c7cdc45378ca510904",
+    "url": "assets/styles/vendor/fontello/config.json"
   },
   {
     "revision": "71ac7510909f7600273dfb6701b337c0",
