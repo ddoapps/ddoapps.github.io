@@ -1,4 +1,4 @@
-importScripts("precache-manifest.2314781288fee9d3ddd2b7f7b918b3cc.js", "https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
+importScripts("precache-manifest.47298aa01102aa1cd50f637f3213b2cd.js", "https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 'use strict';
 
@@ -146,6 +146,11 @@ const HEAD = 'HEAD';
 						values => {
 							let quests = values[ 0 ];
 							let packs = values[ 1 ];
+
+							quests.forEach( quest => {
+								if ( quest.heroic ) quest.heroic.level = ( quest.heroic.normal || quest.heroic.casual ).level;
+								if ( quest.epic ) quest.epic.level = ( quest.epic.normal || quest.epic.casual ).level;
+							} );
 
 							packs.forEach( pack => {
 								pack.quests.forEach( id => {
