@@ -1,4 +1,4 @@
-importScripts("precache-manifest.242adfbb29e4aace2e0244fb55fec2fc.js", "https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
+importScripts("precache-manifest.caa164c56e0717797630847e37db3fb6.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 'use strict';
 
@@ -6,8 +6,8 @@ const GET = 'GET';
 const HEAD = 'HEAD';
 
 ( function () {
-	workbox.skipWaiting();
-	workbox.clientsClaim();
+	workbox.core.skipWaiting();
+	workbox.core.clientsClaim();
 
 	let currentCacheNames = Object.assign(
 		{ precacheTemp: workbox.core.cacheNames.precache +'-temp' }
@@ -29,13 +29,13 @@ const HEAD = 'HEAD';
 	} );
 
 	self.__precacheManifest = [].concat( self.__precacheManifest || [] );
-	workbox.precaching.suppressWarnings();
+	//workbox.precaching.suppressWarnings();
 	workbox.precaching.precacheAndRoute( self.__precacheManifest, {} );
 
-	workbox.routing.registerRoute( /^http[s]?:\/\/fonts.googleapis.com\/(.*)/, workbox.strategies.staleWhileRevalidate(), GET );
-	workbox.routing.registerRoute( /^http[s]?:\/\/fonts.gstatic.com\/(.*)/, workbox.strategies.staleWhileRevalidate(), GET );
+	workbox.routing.registerRoute( /^http[s]?:\/\/fonts.googleapis.com\/(.*)/, new workbox.strategies.StaleWhileRevalidate(), GET );
+	workbox.routing.registerRoute( /^http[s]?:\/\/fonts.gstatic.com\/(.*)/, new workbox.strategies.StaleWhileRevalidate(), GET );
 	
-	workbox.routing.registerRoute( /\/assets\/styles\/vendor\/fontello\/font\/(.+)[.](.+)[?](.+)$/, workbox.strategies.staleWhileRevalidate(), GET );
+	workbox.routing.registerRoute( /\/assets\/styles\/vendor\/fontello\/font\/(.+)[.](.+)[?](.+)$/, new workbox.strategies.StaleWhileRevalidate(), GET );
 }() );
 
 ( function () {
@@ -106,7 +106,7 @@ const HEAD = 'HEAD';
 				return new Promise( resolve => {
 					caches.open( workbox.core.cacheNames.precache ).then( cache => {
 						cache.keys().then( cacheKeys => {
-							let cacheKey = cacheKeys.find( cacheKey => cacheKey.url.endsWith( fileName ) );
+							let cacheKey = cacheKeys.find( cacheKey => cacheKey.url.indexOf( fileName ) > -1 );
 
 							cache.match( cacheKey ).then( response => {
 								response.json().then( json => resolve( json ) );
@@ -116,15 +116,15 @@ const HEAD = 'HEAD';
 				} );
 			}
 			, retrievePacks () {
-				if ( !allPacksPromise ) allPacksPromise = functions.retrieveJsonFromPreCache( 'packs.json' );
+				if ( !allPacksPromise ) allPacksPromise = functions.retrieveJsonFromPreCache( '/jsons/packs.json' );
 				return allPacksPromise;
 			}
 			, retrieveQuests () {
-				if ( !allQuestsPromise ) allQuestsPromise = functions.retrieveJsonFromPreCache( 'quests.json' );
+				if ( !allQuestsPromise ) allQuestsPromise = functions.retrieveJsonFromPreCache( '/jsons/quests.json' );
 				return allQuestsPromise;
 			}
 			, retrieveSagas () {
-				if ( !allSagasPromise ) allSagasPromise = functions.retrieveJsonFromPreCache( 'sagas.json' );
+				if ( !allSagasPromise ) allSagasPromise = functions.retrieveJsonFromPreCache( '/jsons/sagas.json' );
 				return allSagasPromise;
 			}
 			, respondWith ( data, status ) {
