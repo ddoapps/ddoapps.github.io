@@ -84,15 +84,15 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "assets/styles/vendor/fontello/font/fontello.woff2"
   },
   {
-    "revision": "71ac7510909f7600273dfb6701b337c0",
+    "revision": "268302e6927fb50d2b008f61058f7697",
     "url": "index.html"
   },
   {
-    "revision": "11d0e36d0a7f6865171b",
+    "revision": "de96ef6398bb4dd7f737",
     "url": "main.css"
   },
   {
-    "revision": "11d0e36d0a7f6865171b",
+    "revision": "de96ef6398bb4dd7f737",
     "url": "main.js"
   }
 ]);

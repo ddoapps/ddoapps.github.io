@@ -1,4 +1,4 @@
-importScripts("precache-manifest.919a7f27d4b32212dbb2f414adf5750c.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+importScripts("precache-manifest.4fe4f19d665ceb4a76fbe54ab8142ce7.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 "use strict";
 var Constants = (function () {
