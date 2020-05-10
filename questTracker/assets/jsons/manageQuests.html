@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Quest Manager</title>
+
+        <style>
+            body { background-color: rgb(230, 230, 230); }
+
+            .heroic { background-color: rgba(255, 0, 0, 0.5); }
+            .epic { background-color: rgba(160, 0, 160, 0.5); }
+
+            [class$="-level"] { width: 44px; }
+            [class$="-xp"] { width: 65px; }
+
+            table table { margin: 12px; }
+        </style>
+    </head>
+
+    <body>
+        <table id="questList" border="1" cellpadding="2" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Duration</th>
+                    <th class="heroic">Heroic</th>
+                    <th class="epic">Epic</th>
+                </tr>
+            </thead>
+
+            <tbody>
+            </tbody>
+
+            <tfoot>
+                <tr>
+                    <td>
+                        <button type="button" id="addNewQuest">Add New Quest</button>
+                    </td>
+                    <td>
+                        <button type="button" id="generateJSON">Generate JSON</button>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <template id="newRow">
+            <td><input type="text" class="id"></td>
+            <td><input type="text" class="name"></td>
+
+            <td>
+                <select class="duration">
+                    <option value=""></option>
+                    <option value="very short">Very Short</option>
+                    <option value="short">Short</option>
+                    <option value="medium">Medium</option>
+                    <option value="long">Long</option>
+                    <option value="very long">Very Long</option>
+                </select>
+            </td>
+
+            <td class="heroic">
+                <table border="1" cellpadding="2" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th colspan="2">Casual</th>
+                            <th colspan="2">Normal</th>
+                            <th colspan="2">Hard</th>
+                            <th colspan="2">Elite</th>
+                        </tr>
+
+                        <tr>
+                            <td>Level</td>
+                            <td>Experience</td>
+                            <td>Level</td>
+                            <td>Experience</td>
+                            <td>Level</td>
+                            <td>Experience</td>
+                            <td>Level</td>
+                            <td>Experience</td>
+                        </tr>
+                    </thead>
+        
+                    <tbody>
+                        <tr>
+                            <td><input type="number" min="-1" value="-1" class="casual-level"></td>
+                            <td><input type="number" min="-1" value="-1" class="casual-xp"></td>
+                            <td><input type="number" min="-1" value="-1" class="normal-level"></td>
+                            <td><input type="number" min="-1" value="-1" class="normal-xp"></td>
+                            <td><input type="number" min="-1" value="-1" class="hard-level"></td>
+                            <td><input type="number" min="-1" value="-1" class="hard-xp"></td>
+                            <td><input type="number" min="-1" value="-1" class="elite-level"></td>
+                            <td><input type="number" min="-1" value="-1" class="elite-xp"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+
+            <td class="epic">
+                <table border="1" cellpadding="2" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th colspan="2">Casual</th>
+                            <th colspan="2">Normal</th>
+                            <th colspan="2">Hard</th>
+                            <th colspan="2">Elite</th>
+                        </tr>
+
+                        <tr>
+                            <td>Level</td>
+                            <td>Experience</td>
+                            <td>Level</td>
+                            <td>Experience</td>
+                            <td>Level</td>
+                            <td>Experience</td>
+                            <td>Level</td>
+                            <td>Experience</td>
+                        </tr>
+                    </thead>
+        
+                    <tbody>
+                        <tr>
+                            <td><input type="number" min="-1" value="-1" class="casual-level"></td>
+                            <td><input type="number" min="-1" value="-1" class="casual-xp"></td>
+                            <td><input type="number" min="-1" value="-1" class="normal-level"></td>
+                            <td><input type="number" min="-1" value="-1" class="normal-xp"></td>
+                            <td><input type="number" min="-1" value="-1" class="hard-level"></td>
+                            <td><input type="number" min="-1" value="-1" class="hard-xp"></td>
+                            <td><input type="number" min="-1" value="-1" class="elite-level"></td>
+                            <td><input type="number" min="-1" value="-1" class="elite-xp"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+
+            <td>
+                <button type="button" class="normalize-id">Normalize ID</button>
+                <button type="button" class="normalize-levels">Normalize Levels</button>
+            </td>
+        </template>
+
+        <script>
+            document.querySelector('#generateJSON').addEventListener('click', generateJSON);
+            document.querySelector('#addNewQuest').addEventListener('click', addNewQuest);
+            document.querySelector('#questList').addEventListener('click', normalizeLevels);
+            document.querySelector('#questList').addEventListener('click', normalizeIds);
+
+            fetch('./quests.json')
+                .then(response => response.json())
+                .then(data => {
+                    const rowTemplate = document.querySelector('#newRow').innerHTML;
+                    const fragment = document.createDocumentFragment();
+
+                    data.forEach(quest => {
+                        const row = document.createElement('tr');
+
+                        row.innerHTML = rowTemplate;
+
+                        row.querySelector('.id').value = quest.id;
+                        row.querySelector('.name').value = quest.name;
+                        row.querySelector('.duration').value = quest.duration;
+                        
+                        addDataToRow(row, quest, 'heroic', 'casual');
+                        addDataToRow(row, quest, 'heroic', 'normal');
+                        addDataToRow(row, quest, 'heroic', 'hard');
+                        addDataToRow(row, quest, 'heroic', 'elite');
+                        
+                        addDataToRow(row, quest, 'epic', 'casual');
+                        addDataToRow(row, quest, 'epic', 'normal');
+                        addDataToRow(row, quest, 'epic', 'hard');
+                        addDataToRow(row, quest, 'epic', 'elite');
+
+                        fragment.appendChild(row);
+                    });
+
+                    document.querySelector('#questList > tbody').appendChild(fragment);
+                });
+
+                function addDataToRow(row, quest, type, difficulty) {
+                    if (quest[type]) {
+                        if (quest[type][difficulty]) {
+                            row.querySelector(`.${type} .${difficulty}-level`).value = quest[type][difficulty].level;
+                            row.querySelector(`.${type} .${difficulty}-xp`).value = quest[type][difficulty].xp;
+                        }
+                    }
+                }
+
+                function generateJSON() {
+                    const textarea = document.querySelector('#output') || document.createElement('textarea');
+
+                    textarea.id = 'output';
+                    textarea.rows = 10;
+                    textarea.cols = 100;
+                    textarea.value = '';
+
+                    const quests = [];
+
+                    [...document.querySelectorAll('#questList > tbody > tr')].forEach(row => {
+                        const quest = {
+                            id: row.querySelector('.id').value,
+                            name: row.querySelector('.name').value,
+                            duration: row.querySelector('.duration').value,
+                            heroic: {
+                                casual: {
+                                    xp: Number(row.querySelector('.heroic .casual-xp').value),
+                                    level: Number(row.querySelector('.heroic .casual-level').value)
+                                },
+                                normal: {
+                                    xp: Number(row.querySelector('.heroic .normal-xp').value),
+                                    level: Number(row.querySelector('.heroic .normal-level').value)
+                                },
+                                hard: {
+                                    xp: Number(row.querySelector('.heroic .hard-xp').value),
+                                    level: Number(row.querySelector('.heroic .hard-level').value)
+                                },
+                                elite: {
+                                    xp: Number(row.querySelector('.heroic .elite-xp').value),
+                                    level: Number(row.querySelector('.heroic .elite-level').value)
+                                }
+                            },
+                            epic: {
+                                casual: {
+                                    xp: Number(row.querySelector('.epic .casual-xp').value),
+                                    level: Number(row.querySelector('.epic .casual-level').value)
+                                },
+                                normal: {
+                                    xp: Number(row.querySelector('.epic .normal-xp').value),
+                                    level: Number(row.querySelector('.epic .normal-level').value)
+                                },
+                                hard: {
+                                    xp: Number(row.querySelector('.epic .hard-xp').value),
+                                    level: Number(row.querySelector('.epic .hard-level').value)
+                                },
+                                elite: {
+                                    xp: Number(row.querySelector('.epic .elite-xp').value),
+                                    level: Number(row.querySelector('.epic .elite-level').value)
+                                }
+                            }
+                        };
+
+                        if (questTypeDoesNotHaveALevel(quest.heroic)) delete quest.heroic;
+                        if (questTypeDoesNotHaveALevel(quest.epic)) delete quest.epic;
+
+                        quests.push(quest);
+                    });
+
+                    quests.sort((a, b) => a.id.localeCompare(b.id));
+
+                    textarea.value = JSON.stringify(quests);
+
+                    document.body.appendChild(textarea);
+                }
+
+                function questTypeDoesNotHaveALevel(questType) {
+                    let levelDoesNotExist = true;
+
+                    ['casual', 'normal', 'hard', 'elite'].forEach(difficulty => {
+                        if (questType[difficulty].level < 0) {
+                            delete questType[difficulty];
+                        } else {
+                            levelDoesNotExist = false;
+                        }
+                    });
+
+                    return levelDoesNotExist;
+                }
+
+                function addNewQuest() {
+                    const rowTemplate = document.querySelector('#newRow').innerHTML;
+                    const row = document.createElement('tr');
+
+                    row.innerHTML = rowTemplate;
+                    
+                    document.querySelector('#questList > tbody').appendChild(row);
+                }
+
+                function normalizeIds(e) {
+                    if (!e.target.classList.contains('normalize-id')) return;
+
+                    const row = e.target.parentNode.parentNode;
+                    const name = row.querySelector('.name').value;
+
+                    row.querySelector('.id').value = name.toLowerCase().replace(/\s/g, '');
+                }
+
+                function normalizeLevels(e) {
+                    if (!e.target.classList.contains('normalize-levels')) return;
+
+                    const row = e.target.parentNode.parentNode;
+
+                    ['heroic', 'epic'].forEach(questType => {
+                        const subTable = row.querySelector('.'+ questType);
+                        const normalLevel = Number(subTable.querySelector('.normal-level').value);
+
+                        subTable.querySelector('.casual-level').value = Math.max(1, normalLevel - 1);
+                        subTable.querySelector('.hard-level').value = normalLevel + 1;
+                        subTable.querySelector('.elite-level').value = normalLevel + 2;
+                    });
+                }
+        </script>
+    </body>
+</html>
